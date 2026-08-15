@@ -3,718 +3,726 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WatchMori - Track Your Anime Journey</title>
-    <meta name="description" content="WatchMori - The ultimate iOS app to track, discover, and organize your anime watchlist.">
-    
+    <title>WatchMori — Your Anime Companion</title>
+    <meta name="description" content="WatchMori is a free iPhone and iPad app for tracking anime. Log episodes, browse 150,000+ titles from AniList, earn XP, and get alerts when new episodes air.">
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    
+
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="WatchMori - Track Your Anime Journey">
-    <meta property="og:description" content="The ultimate iOS app to track, discover, and organize your anime watchlist.">
+    <meta property="og:title" content="WatchMori — Your Anime Companion">
+    <meta property="og:description" content="A free iPhone and iPad app for tracking anime. Log episodes, browse 150,000+ titles, earn XP, never miss a release.">
     <meta property="og:image" content="https://watchmori.io/watchmori-icon.png">
-    <meta property="og:url" content="https://WatchMori.io">
+    <meta property="og:url" content="https://watchmori.io">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    
+    <meta name="theme-color" content="#0d0a14">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --accent-pink: #ff3366;
-            --accent-cyan: #00f5d4;
-            --accent-purple: #9d4edd;
-            --text-primary: #ffffff;
-            --text-secondary: #8a8a9a;
-            --gradient-glow: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-purple) 50%, var(--accent-cyan) 100%);
+            --bg:        #0d0a14;
+            --bg-raised: #16121f;
+            --line:      rgba(255, 255, 255, 0.09);
+            --line-soft: rgba(255, 255, 255, 0.05);
+            --ink:       #f4f1f8;
+            --ink-dim:   #a49db4;
+            --violet:    #b98cf5;
+            --pink:      #f78bb4;
+            --teal:      #2f8ba6;
+            --radius:    16px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
+            font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Animated Background */
-        .bg-grid {
-            position: fixed;
+        a { color: inherit; }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ---------- Nav ---------- */
+        nav {
+            position: sticky;
             top: 0;
-            left: 0;
+            z-index: 50;
+            background: rgba(13, 10, 20, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            height: 68px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 1px var(--line);
+        }
+
+        .brand-mark img {
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(157, 78, 221, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(157, 78, 221, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            filter: blur(150px);
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-glow-1 {
-            top: -200px;
-            right: -100px;
-            background: var(--accent-pink);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .bg-glow-2 {
-            bottom: -200px;
-            left: -100px;
-            background: var(--accent-cyan);
-            animation: float 25s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 30px); }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.5rem 2rem;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Dela Gothic One', cursive;
-            font-size: 1.5rem;
-            background: var(--gradient-glow);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
+            object-fit: cover;
+            transform: scale(1.14);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            gap: 1.75rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color: var(--ink-dim);
+            font-weight: 600;
             font-size: 0.95rem;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
+        .nav-links a:hover { color: var(--ink); }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 100px;
+            background: var(--ink);
+            color: #16121f !important;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: opacity 0.2s;
         }
 
-        /* Hero Section */
+        .nav-cta:hover { opacity: 0.85; }
+        .nav-cta svg { width: 15px; height: 15px; }
+
+        /* ---------- Hero ---------- */
         .hero {
             position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
+            padding: 5.5rem 0 4.5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -320px;
+            left: 50%;
+            transform: translateX(-30%);
+            width: 780px;
+            height: 640px;
+            background: radial-gradient(circle, rgba(185, 140, 245, 0.16) 0%, transparent 62%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 4rem;
             align-items: center;
-            justify-content: center;
-            padding: 8rem 2rem 4rem;
         }
 
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-        }
-
-        .hero-badge {
+        .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid rgba(255, 51, 102, 0.3);
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--accent-pink);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--violet);
+            margin-bottom: 1.25rem;
         }
 
-        .hero-badge::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent-pink);
+        .eyebrow span {
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            background: currentColor;
+            opacity: 0.5;
         }
 
         h1 {
-            font-family: 'Dela Gothic One', cursive;
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.1s both;
+            font-size: clamp(2.4rem, 5.4vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.25rem;
         }
 
-        h1 .gradient-text {
-            background: var(--gradient-glow);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        h1 em {
+            font-style: normal;
+            color: var(--violet);
         }
 
-        .hero-description {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient-glow);
-            color: white;
-            box-shadow: 0 4px 30px rgba(255, 51, 102, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 40px rgba(255, 51, 102, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Phone Mockup */
-        .phone-mockup {
-            margin-top: 4rem;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .phone-frame {
-            width: 280px;
-            height: 560px;
-            background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
-            border-radius: 40px;
-            padding: 12px;
-            margin: 0 auto;
-            box-shadow: 
-                0 50px 100px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #1a1a2e 0%, #12121a 100%);
-            border-radius: 32px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 30px;
-            background: #0a0a0f;
-            border-radius: 0 0 20px 20px;
-        }
-
-        .app-preview {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .app-icon-large {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            overflow: hidden;
-        }
-
-        .app-icon-large img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .app-preview h3 {
-            font-family: 'Dela Gothic One', cursive;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .app-preview p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        /* Sections */
-        section {
-            position: relative;
-            z-index: 1;
-            padding: 6rem 2rem;
-        }
-
-        .section-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-family: 'Dela Gothic One', cursive;
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            font-size: 1.1rem;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 51, 102, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255, 51, 102, 0.2) 0%, rgba(157, 78, 221, 0.2) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Help Section */
-        #help {
-            background: linear-gradient(180deg, transparent 0%, rgba(157, 78, 221, 0.05) 50%, transparent 100%);
-        }
-
-        .help-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 3rem;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .help-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(0, 245, 212, 0.2) 0%, rgba(157, 78, 221, 0.2) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 2rem;
-        }
-
-        .help-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .help-card p {
-            color: var(--text-secondary);
+        .lede {
+            font-size: 1.125rem;
+            color: var(--ink-dim);
+            max-width: 34rem;
             margin-bottom: 2rem;
         }
 
-        .email-link {
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .appstore-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-cyan);
-            font-size: 1.1rem;
-            font-weight: 500;
+            gap: 0.7rem;
+            padding: 0.7rem 1.4rem 0.75rem;
+            border-radius: 13px;
+            background: var(--ink);
+            color: #100d18;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
         }
 
-        .email-link:hover {
-            color: var(--text-primary);
+        .appstore-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
         }
 
-        .email-link svg {
-            width: 20px;
-            height: 20px;
+        .appstore-badge svg { width: 26px; height: 26px; flex-shrink: 0; }
+
+        .appstore-badge .badge-text { line-height: 1.15; text-align: left; }
+        .appstore-badge .badge-small { display: block; font-size: 0.68rem; font-weight: 600; opacity: 0.7; }
+        .appstore-badge .badge-large { display: block; font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; }
+
+        .actions-note {
+            font-size: 0.9rem;
+            color: var(--ink-dim);
         }
 
-        /* Footer */
-        footer {
+        .actions-note strong { color: var(--ink); font-weight: 700; }
+
+        /* Hero device: cropped from the App Store artwork */
+        .device {
             position: relative;
-            z-index: 1;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem 2rem;
+            width: 100%;
+            aspect-ratio: 675 / 1160;
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--line);
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .device img {
+            position: absolute;
+            width: 111.1%;
+            height: 140%;
+            left: -7.4%;
+            top: -37.9%;
+            object-fit: cover;
+        }
+
+        /* ---------- Facts strip ---------- */
+        .facts {
+            border-top: 1px solid var(--line-soft);
+            border-bottom: 1px solid var(--line-soft);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .facts-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            padding: 1.75rem 0;
+        }
+
+        .fact { text-align: center; }
+
+        .fact dt {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .fact dd {
+            font-size: 0.82rem;
+            color: var(--ink-dim);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ---------- Sections ---------- */
+        section { padding: 5.5rem 0; }
+
+        .section-head { margin-bottom: 3rem; max-width: 40rem; }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.6vw, 2.35rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-head p { color: var(--ink-dim); font-size: 1.05rem; }
+
+        /* ---------- Screenshot panorama ---------- */
+        #screens {
+            background: linear-gradient(180deg, transparent, rgba(47, 139, 166, 0.09) 40%, transparent);
+        }
+
+        .shots {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .shots::-webkit-scrollbar { display: none; }
+
+        .shots img {
+            display: block;
+            height: 520px;
+            width: auto;
+            flex: none;
+            border-radius: 14px;
+            scroll-snap-align: center;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--line);
+        }
+
+        .shots-hint {
+            display: none;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--ink-dim);
+            text-align: center;
+        }
+
+        /* ---------- Features ---------- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem 2.75rem;
+        }
+
+        .feature h3 {
+            font-size: 1.075rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature p {
+            color: var(--ink-dim);
+            font-size: 0.95rem;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 1rem;
+            background: rgba(185, 140, 245, 0.11);
+            border: 1px solid rgba(185, 140, 245, 0.18);
+            color: var(--violet);
+        }
+
+        .feature-icon svg { width: 19px; height: 19px; }
+
+        /* ---------- Privacy band ---------- */
+        #privacy-band { padding: 0 0 5.5rem; }
+
+        .band {
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background:
+                radial-gradient(120% 140% at 100% 0%, rgba(247, 139, 180, 0.09), transparent 55%),
+                var(--bg-raised);
+            padding: 2.75rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .band h2 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+        .band p { color: var(--ink-dim); max-width: 36rem; }
+
+        .band ul {
+            list-style: none;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .band li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .band li svg { width: 17px; height: 17px; color: var(--pink); flex-shrink: 0; }
+
+        /* ---------- Support ---------- */
+        #help { border-top: 1px solid var(--line-soft); }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .support-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            background: var(--bg-raised);
+        }
+
+        .support-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .support-card p { color: var(--ink-dim); font-size: 0.95rem; margin-bottom: 1rem; }
+
+        .support-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--violet);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .support-card a:hover { border-bottom-color: currentColor; }
+        .support-card a svg { width: 15px; height: 15px; }
+
+        /* ---------- Footer ---------- */
+        footer {
+            border-top: 1px solid var(--line-soft);
+            padding: 3rem 0 3.5rem;
+            font-size: 0.9rem;
+            color: var(--ink-dim);
+        }
+
+        .footer-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 2rem;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            margin-bottom: 2.25rem;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.75rem;
             list-style: none;
+            flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
+        .footer-links a { text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--ink); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--line-soft);
+            font-size: 0.85rem;
         }
 
-        .footer-links a:hover {
-            color: var(--text-primary);
+        .footer-bottom a { color: var(--ink-dim); }
+        .footer-bottom a:hover { color: var(--ink); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .device { max-width: 300px; margin: 0 auto; }
+            .features { grid-template-columns: repeat(2, 1fr); }
+            .band { grid-template-columns: 1fr; gap: 1.75rem; padding: 2rem; }
         }
 
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        @media (max-width: 640px) {
+            .nav-links li:not(:last-child) { display: none; }
+            .hero { padding: 3.5rem 0 3rem; }
+            section { padding: 4rem 0; }
+            .facts-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; }
+            .features { grid-template-columns: 1fr; gap: 2rem; }
+            .support-grid { grid-template-columns: 1fr; }
+            .shots img { height: 420px; }
+            .shots-hint { display: block; }
+            .footer-top { flex-direction: column; gap: 1.5rem; }
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 7rem 1.5rem 3rem;
-            }
-
-            .hero-description {
-                font-size: 1.1rem;
-            }
-
-            .cta-group {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-            }
-
-            .phone-frame {
-                width: 240px;
-                height: 480px;
-            }
-
-            section {
-                padding: 4rem 1.5rem;
-            }
-
-            .help-card {
-                padding: 2rem;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
 
-        /* Smooth scroll offset for fixed nav */
-        #features, #help {
-            scroll-margin-top: 100px;
-        }
+        #features, #screens, #help { scroll-margin-top: 80px; }
     </style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="bg-grid"></div>
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
 
-    <!-- Navigation -->
     <nav>
-        <div class="nav-content">
-            <a href="#" class="logo">WatchMori</a>
+        <div class="wrap nav-inner">
+            <a href="#" class="brand">
+                <span class="brand-mark"><img src="watchmori-icon.png" alt=""></span>
+                WatchMori
+            </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#help">Help</a></li>
-                <li><a href="https://apps.apple.com/us/app/watchmori/id6757887049" target="_blank">Download</a></li>
+                <li><a href="#screens">Screenshots</a></li>
+                <li><a href="#help">Support</a></li>
+                <li>
+                    <a href="https://apps.apple.com/us/app/watchmori/id6757887049" class="nav-cta" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Get the app
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-badge">Available on iOS</span>
-            <h1>Track Your <span class="gradient-text">Anime Journey</span></h1>
-            <p class="hero-description">
-                The ultimate companion for anime enthusiasts. Discover new series, track your watchlist, and never lose your place again.
-            </p>
-            <div class="cta-group">
-                <a href="https://apps.apple.com/us/app/watchmori/id6757887049" class="btn btn-primary" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                    Download on App Store
-                </a>
-                <a href="#help" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
-                    Get Help
-                </a>
-            </div>
-
-            <!-- Phone Mockup -->
-            <div class="phone-mockup">
-                <div class="phone-frame">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="app-preview">
-                            <div class="app-icon-large"><img src="watchmori-icon.png" alt="WatchMori"></div>
-                            <h3>WatchMori</h3>
-                            <p>Your anime companion</p>
-                        </div>
-                    </div>
+    <!-- Hero -->
+    <header class="hero">
+        <div class="wrap hero-grid">
+            <div>
+                <p class="eyebrow">iPhone &amp; iPad <span></span> Version 2.1</p>
+                <h1>Keep track of every anime you're <em>watching</em>.</h1>
+                <p class="lede">
+                    WatchMori logs your episodes, remembers where you stopped, and tells you
+                    when the next one airs. Browse 150,000+ titles, build your own collections,
+                    and earn XP as you watch.
+                </p>
+                <div class="actions">
+                    <a href="https://apps.apple.com/us/app/watchmori/id6757887049" class="appstore-badge" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <span class="badge-text">
+                            <span class="badge-small">Download on the</span>
+                            <span class="badge-large">App Store</span>
+                        </span>
+                    </a>
+                    <p class="actions-note"><strong>Free.</strong> No account needed.</p>
                 </div>
             </div>
+
+            <div class="device">
+                <img src="screenshots/shot-4.webp" alt="The WatchMori Discover screen, showing anime genres including fantasy, horror, mecha and mystery.">
+            </div>
+        </div>
+    </header>
+
+    <!-- Facts -->
+    <div class="facts">
+        <dl class="wrap facts-inner">
+            <div class="fact"><dt>150,000+</dt><dd>Titles</dd></div>
+            <div class="fact"><dt>13.2 MB</dt><dd>Download</dd></div>
+            <div class="fact"><dt>Zero</dt><dd>Data collected</dd></div>
+            <div class="fact"><dt>Free</dt><dd>No ads</dd></div>
+        </dl>
+    </div>
+
+    <!-- Screenshots -->
+    <section id="screens">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>A look inside</h2>
+                <p>Your list, your stats, and everything airing this season.</p>
+            </div>
+            <div class="shots">
+                <img src="screenshots/shot-1.webp" alt="Find and track your favourite anime — the statistics screen showing episodes watched and total time.">
+                <img src="screenshots/shot-2.webp" alt="A real-time airing schedule so you never miss an episode.">
+                <img src="screenshots/shot-3.webp" alt="Level up and earn achievements as you watch — a profile at level 12 with 510 tracked series.">
+                <img src="screenshots/shot-4.webp" alt="Find new anime through the discovery section, browsing by genre.">
+            </div>
+            <p class="shots-hint">Scroll sideways to see more &rarr;</p>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Features -->
     <section id="features">
-        <div class="section-container">
-            <h2>Why <span class="gradient-text">WatchMori</span>?</h2>
-            <p class="section-subtitle">Everything you need to organize and enhance your anime watching experience.</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Smart Watchlist</h3>
-                    <p>Keep track of what you're watching, plan to watch, and have completed. Never lose your progress again.</p>
+        <div class="wrap">
+            <div class="section-head">
+                <h2>Built for people with long watchlists</h2>
+                <p>Everything is optional. Turn on what you want, ignore the rest.</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+                    </div>
+                    <h3>Episode-level tracking</h3>
+                    <p>Mark episodes as you go, rate what you finish, and pick straight back up where you left off.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Discover New Anime</h3>
-                    <p>Get personalized recommendations based on your taste and explore trending series from every season.</p>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z"/></svg>
+                    </div>
+                    <h3>Discover by genre or season</h3>
+                    <p>Browse the whole AniList catalogue — what's trending, what's airing now, or anything from fantasy to slice of life.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Track Progress</h3>
-                    <p>Mark episodes as watched, rate series, and see detailed statistics about your viewing habits.</p>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                    </div>
+                    <h3>XP, levels and achievements</h3>
+                    <p>Every episode earns experience. Level up your profile and unlock achievements as your history grows.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔔</div>
-                    <h3>Release Alerts</h3>
-                    <p>Stay updated with notifications when new episodes of your favorite series drop.</p>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 6h9.4a2 2 0 0 1 1.9 2.6l-2.7 8A2 2 0 0 1 17.2 18H3.6a2 2 0 0 1-2-2.3L3 6"/><path d="M2 6V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.7.9l.9 1.4"/></svg>
+                    </div>
+                    <h3>Collections that make sense to you</h3>
+                    <p>Group series however you like — comfort shows, rewatches, "someday" — instead of one endless backlog.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌙</div>
-                    <h3>Beautiful Design</h3>
-                    <p>A stunning dark-mode interface designed for late-night binge sessions.</p>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+                    </div>
+                    <h3>Alerts when episodes drop</h3>
+                    <p>A live airing schedule for everything you're watching, with notifications you can tune or switch off entirely.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">☁️</div>
-                    <h3>Sync Everywhere</h3>
-                    <p>Your data syncs seamlessly across all your devices so you're always up to date.</p>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/></svg>
+                    </div>
+                    <h3>Bring your list with you</h3>
+                    <p>Import everything you've already logged on AniList or MyAnimeList. No starting from scratch.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Help Section -->
+    <!-- Privacy band -->
+    <div id="privacy-band">
+        <div class="wrap">
+            <div class="band">
+                <div>
+                    <h2>No account. No ads. No data collected.</h2>
+                    <p>
+                        Use guest mode and everything stays on your device — Apple lists WatchMori
+                        as collecting no data at all. Sign in with Apple only if you want your list
+                        synced across devices, and social features stay off until you turn them on.
+                    </p>
+                </div>
+                <ul>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Guest mode by default</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No third-party analytics</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Export or delete anytime</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support -->
     <section id="help">
-        <div class="section-container">
-            <h2>Need <span class="gradient-text">Help</span>?</h2>
-            <p class="section-subtitle">We're here to assist you with any questions or issues.</p>
-            
-            <div class="help-card">
-                <div class="help-icon">💬</div>
-                <h3>Contact Support</h3>
-                <p>Having trouble with the app or have a feature request? Our support team is ready to help you out. We typically respond within 24 hours.</p>
-                <a href="mailto:support@watchmori.io" class="email-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    support@watchmori.io
-                </a>
+        <div class="wrap">
+            <div class="section-head">
+                <h2>Something not working?</h2>
+                <p>WatchMori is made by one person, so you'll be talking to the developer directly.</p>
+            </div>
+
+            <div class="support-grid">
+                <div class="support-card">
+                    <h3>Bugs and feature requests</h3>
+                    <p>Tell me what broke or what's missing. I usually reply within a day.</p>
+                    <a href="mailto:support@watchmori.io">
+                        support@watchmori.io
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </div>
+                <div class="support-card">
+                    <h3>Your data</h3>
+                    <p>Questions about what's stored, or want it removed? Read the policy or get in touch.</p>
+                    <a href="/privacy">
+                        Privacy policy
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <a href="#" class="logo">WatchMori</a>
-            <ul class="footer-links">
-                <li><a href="https://apps.apple.com/us/app/watchmori/id6757887049" target="_blank">App Store</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#help">Support</a></li>
-                <li><a href="/privacy">Privacy</a></li>
-            </ul>
-            <p class="copyright">&copy; 2026 WatchMori. All rights reserved.</p>
+        <div class="wrap">
+            <div class="footer-top">
+                <a href="#" class="brand">
+                    <span class="brand-mark"><img src="watchmori-icon.png" alt=""></span>
+                    WatchMori
+                </a>
+                <ul class="footer-links">
+                    <li><a href="https://apps.apple.com/us/app/watchmori/id6757887049" target="_blank" rel="noopener">App Store</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screens">Screenshots</a></li>
+                    <li><a href="#help">Support</a></li>
+                    <li><a href="/privacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 WatchMori &middot; Made by Martyn O'Neill &middot; Requires iOS 18.6 or later</p>
+                <p>Anime data from <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a></p>
+            </div>
         </div>
     </footer>
+
 </body>
 </html>

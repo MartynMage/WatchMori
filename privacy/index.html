@@ -3,541 +3,552 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - WatchMori</title>
+    <title>Privacy Policy — WatchMori</title>
+    <meta name="description" content="How WatchMori handles your data: guest mode keeps everything on your device, no trackers, no ads, and you can export or delete your data at any time.">
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#0d0a14">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg:        #0d0a14;
+            --bg-raised: #16121f;
+            --line:      rgba(255, 255, 255, 0.09);
+            --line-soft: rgba(255, 255, 255, 0.05);
+            --ink:       #f4f1f8;
+            --ink-dim:   #a49db4;
+            --violet:    #b98cf5;
+            --pink:      #f78bb4;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 900px;
+        .wrap { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Nav */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(13, 10, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .nav-inner {
+            max-width: 1080px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            padding: 0 1.5rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .last-updated {
-            background: #f8f9fa;
-            padding: 15px 30px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .content {
-            padding: 40px 30px;
-        }
-
-        h2 {
-            color: #764ba2;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-            font-size: 1.8em;
-        }
-
-        h3 {
-            color: #667eea;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        p {
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            color: #555;
-        }
-
-        .highlight-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 8px;
-        }
-
-        .highlight-box.warning {
-            background: #fff3cd;
-            border-left-color: #ffc107;
-        }
-
-        .highlight-box.success {
-            background: #d4edda;
-            border-left-color: #28a745;
-        }
-
-        .icon {
-            margin-right: 8px;
-        }
-
-        .summary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 40px 0;
-        }
-
-        .summary h3 {
-            color: white;
-            border: none;
-            margin-top: 0;
-        }
-
-        .summary ul {
-            list-style: none;
-            margin-left: 0;
-        }
-
-        .summary li:before {
-            content: "✓ ";
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        .contact-box {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .contact-box a {
-            color: #667eea;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
             text-decoration: none;
+            color: var(--ink);
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 1px var(--line);
+        }
+
+        .brand-mark img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.14); }
+
+        .nav-back {
+            color: var(--ink-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-back:hover { color: var(--ink); }
+
+        /* Header */
+        header.page {
+            padding: 4rem 0 2.5rem;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        header.page h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+            margin-bottom: 0.85rem;
+        }
+
+        header.page .subtitle { color: var(--ink-dim); font-size: 1.1rem; }
+
+        .updated {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--line);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            color: var(--ink-dim);
             font-weight: 600;
         }
 
-        .contact-box a:hover {
-            text-decoration: underline;
+        /* Content */
+        .content { padding: 3rem 0 4rem; }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 3rem 0 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--line-soft);
         }
 
-        .footer {
-            background: #2d3748;
-            color: white;
-            padding: 30px;
-            text-align: center;
+        .content > h2:first-of-type { border-top: none; padding-top: 0; }
+
+        h3 {
+            font-size: 1.075rem;
+            font-weight: 700;
+            color: var(--violet);
+            margin: 2rem 0 0.65rem;
         }
 
-        .footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
+        p { margin-bottom: 1rem; color: var(--ink-dim); }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+        strong { color: var(--ink); font-weight: 700; }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
+        ul, ol { margin: 0 0 1.25rem 1.35rem; }
 
-            .header h1 {
-                font-size: 2em;
-            }
+        li { margin-bottom: 0.45rem; color: var(--ink-dim); }
 
-            .content {
-                padding: 30px 20px;
-            }
+        li::marker { color: var(--violet); }
 
-            h2 {
-                font-size: 1.5em;
-            }
-        }
+        a { color: var(--violet); text-decoration: none; border-bottom: 1px solid rgba(185, 140, 245, 0.35); }
+        a:hover { border-bottom-color: currentColor; }
 
+        /* Callouts */
+        .highlight-box,
+        .summary,
+        .contact-box,
         .toc {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 30px 0;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--bg-raised);
+            padding: 1.5rem 1.75rem;
+            margin: 1.75rem 0;
         }
 
-        .toc h3 {
-            margin-top: 0;
+        .highlight-box p:last-child,
+        .highlight-box ul:last-child,
+        .summary ul:last-child,
+        .contact-box p:last-child { margin-bottom: 0; }
+
+        .highlight-box { border-left: 3px solid var(--violet); }
+        .highlight-box.success { border-left-color: #4ade80; }
+        .highlight-box.success li::marker { color: #4ade80; }
+        .highlight-box.warning { border-left-color: #fbbf24; }
+        .highlight-box.warning li::marker { color: #fbbf24; }
+
+        .summary {
+            background:
+                radial-gradient(120% 140% at 100% 0%, rgba(247, 139, 180, 0.10), transparent 55%),
+                var(--bg-raised);
+            padding: 1.85rem;
         }
 
-        .toc ul {
-            list-style: none;
-            margin-left: 0;
+        .summary h3 { color: var(--ink); margin: 0 0 1rem; font-size: 1.15rem; }
+        .summary ul { list-style: none; margin-left: 0; }
+        .summary li { display: flex; gap: 0.6rem; align-items: baseline; }
+        .summary li::before { content: "✓"; color: var(--pink); font-weight: 800; }
+
+        .toc h3 { color: var(--ink); margin: 0 0 0.85rem; font-size: 1rem; }
+        .toc ul { list-style: none; margin: 0; columns: 2; column-gap: 2rem; }
+        .toc li { margin-bottom: 0.35rem; }
+        .toc a { border-bottom: none; font-weight: 600; }
+        .toc a:hover { border-bottom: 1px solid currentColor; }
+
+        .contact-box h3 { color: var(--ink); margin: 0 0 0.5rem; }
+
+        h2[id], h3[id] { scroll-margin-top: 88px; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line-soft);
+            padding: 2.5rem 0 3rem;
+            font-size: 0.9rem;
+            color: var(--ink-dim);
         }
 
-        .toc li {
-            margin-bottom: 8px;
+        footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        footer a { color: var(--ink-dim); border-bottom: none; font-weight: 600; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 640px) {
+            header.page { padding: 2.5rem 0 2rem; }
+            .content { padding: 2rem 0 3rem; }
+            .toc ul { columns: 1; }
+            .highlight-box, .summary, .contact-box, .toc { padding: 1.25rem; }
         }
 
-        .toc a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .toc a:hover {
-            text-decoration: underline;
-        }
-
-        strong {
-            color: #333;
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>WatchMori Privacy Policy</h1>
-            <p class="subtitle">We respect your privacy. Here's exactly how we handle your data.</p>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="brand">
+                <span class="brand-mark"><img src="/watchmori-icon.png" alt=""></span>
+                WatchMori
+            </a>
+            <a href="/" class="nav-back">&larr; Back to site</a>
+        </div>
+    </nav>
+
+    <header class="page">
+        <div class="wrap">
+            <h1>Privacy Policy</h1>
+            <p class="subtitle">Exactly what WatchMori stores, where it goes, and how to get rid of it.</p>
+            <p class="updated">Last updated 19 January 2026</p>
+        </div>
+    </header>
+
+    <main class="wrap content">
+<div class="summary">
+            <h3>Quick Summary</h3>
+            <ul>
+                <li><strong>Guest mode:</strong> All data stays on your device</li>
+                <li><strong>Signed-in:</strong> Data syncs securely to our cloud database</li>
+                <li><strong>No tracking:</strong> We don't sell data, use trackers, or show ads</li>
+                <li><strong>Full control:</strong> Export or delete your data anytime</li>
+                <li><strong>Account deletion:</strong> Removes ALL your data from our servers</li>
+            </ul>
         </div>
 
-        <div class="last-updated">
-            <strong>Last Updated:</strong> January 19, 2026
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#info-collected">Information We Collect</a></li>
+                <li><a href="#info-not-collected">What We Don't Collect</a></li>
+                <li><a href="#how-we-use">How We Use Your Information</a></li>
+                <li><a href="#third-party">Third-Party Services</a></li>
+                <li><a href="#security">Data Storage & Security</a></li>
+                <li><a href="#your-rights">Your Privacy Rights</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
         </div>
 
-        <div class="content">
-            <div class="summary">
-                <h3>Quick Summary</h3>
-                <ul>
-                    <li><strong>Guest mode:</strong> All data stays on your device</li>
-                    <li><strong>Signed-in:</strong> Data syncs securely to our cloud database</li>
-                    <li><strong>No tracking:</strong> We don't sell data, use trackers, or show ads</li>
-                    <li><strong>Full control:</strong> Export or delete your data anytime</li>
-                    <li><strong>Account deletion:</strong> Removes ALL your data from our servers</li>
-                </ul>
-            </div>
+        <h2 id="introduction">Introduction</h2>
+        <p>Welcome to WatchMori. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our iOS app and website.</p>
 
-            <div class="toc">
-                <h3>Table of Contents</h3>
-                <ul>
-                    <li><a href="#introduction">Introduction</a></li>
-                    <li><a href="#info-collected">Information We Collect</a></li>
-                    <li><a href="#info-not-collected">What We Don't Collect</a></li>
-                    <li><a href="#how-we-use">How We Use Your Information</a></li>
-                    <li><a href="#third-party">Third-Party Services</a></li>
-                    <li><a href="#security">Data Storage & Security</a></li>
-                    <li><a href="#your-rights">Your Privacy Rights</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
-            </div>
+        <p><strong>Who We Are:</strong> WatchMori is an anime tracking application that helps you organize your watch list, track your progress, and discover new anime.</p>
 
-            <h2 id="introduction">Introduction</h2>
-            <p>Welcome to WatchMori. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our iOS app and website.</p>
+        <h2 id="info-collected">Information We Collect</h2>
 
-            <p><strong>Who We Are:</strong> WatchMori is an anime tracking application that helps you organize your watch list, track your progress, and discover new anime.</p>
-
-            <h2 id="info-collected">Information We Collect</h2>
-
-            <h3>1. Account Information (Optional)</h3>
-            <div class="highlight-box">
-                <p><strong>Sign in with Apple:</strong></p>
-                <ul>
-                    <li>Apple User ID (encrypted, unique identifier)</li>
-                    <li>Email address (if you choose to share it)</li>
-                    <li>Name (if you choose to share it)</li>
-                </ul>
-                <p><strong>Guest Accounts:</strong></p>
-                <ul>
-                    <li>Only a randomly generated local identifier stored on your device</li>
-                    <li>No personal information collected</li>
-                    <li>Data never leaves your device</li>
-                </ul>
-            </div>
-
-            <h3>2. Watch List Data</h3>
-            <p><strong>What we collect:</strong></p>
-            <ul>
-                <li>Anime titles you add to your watch list</li>
-                <li>Episode progress and completion status</li>
-                <li>Your ratings and notes (if you add them)</li>
-                <li>Timestamps of when you add/update entries</li>
-            </ul>
-            <p><strong>Storage:</strong></p>
-            <ul>
-                <li><strong>Guest accounts:</strong> Stored locally on your device only</li>
-                <li><strong>Signed-in accounts:</strong> Stored locally AND synced to our secure cloud database</li>
-            </ul>
-
-            <h3>3. Social Features (Optional)</h3>
-            <p>If you enable social features:</p>
-            <ul>
-                <li>Username you choose</li>
-                <li>Friend code (auto-generated)</li>
-                <li>Friend connections</li>
-                <li>Activity posts (anime completed, level ups)</li>
-                <li>Privacy preferences (who can see your profile/list)</li>
-            </ul>
-
-            <h3>4. Gamification Data</h3>
-            <ul>
-                <li>Your total XP (experience points)</li>
-                <li>Current level and progress</li>
-                <li>Achievement milestones</li>
-            </ul>
-
-            <h3>5. Technical Data</h3>
-            <p>We automatically collect:</p>
-            <ul>
-                <li>Device type and iOS version (for compatibility)</li>
-                <li>App version</li>
-                <li>Crash reports and diagnostic data (anonymized)</li>
-                <li>Image cache storage usage</li>
-            </ul>
-            <p><strong>Purpose:</strong> To fix bugs, improve performance, and ensure compatibility</p>
-
-            <h2 id="info-not-collected">What We Don't Collect</h2>
-            <div class="highlight-box success">
-                <p><strong>We do NOT:</strong></p>
-                <ul>
-                    <li>Track your location</li>
-                    <li>Use advertising trackers or third-party analytics</li>
-                    <li>Sell your data to anyone</li>
-                    <li>Access your photos, contacts, or other apps</li>
-                    <li>Share your personal information with third parties for marketing</li>
-                    <li>Use cookies for tracking on our website</li>
-                    <li>Store passwords (we use Sign in with Apple)</li>
-                </ul>
-            </div>
-
-            <h2 id="how-we-use">How We Use Your Information</h2>
-
-            <h3>Primary Purposes</h3>
-            <ol>
-                <li><strong>Provide Core Functionality</strong>
-                    <ul>
-                        <li>Store and sync your anime watch list</li>
-                        <li>Track your watching progress</li>
-                        <li>Calculate XP and levels</li>
-                    </ul>
-                </li>
-                <li><strong>Enable Social Features</strong>
-                    <ul>
-                        <li>Connect with friends</li>
-                        <li>Share activity updates</li>
-                        <li>View friends' watch lists (based on privacy settings)</li>
-                    </ul>
-                </li>
-                <li><strong>Improve the App</strong>
-                    <ul>
-                        <li>Fix bugs and crashes</li>
-                        <li>Optimize performance</li>
-                        <li>Develop new features</li>
-                    </ul>
-                </li>
-                <li><strong>Account Management</strong>
-                    <ul>
-                        <li>Authenticate you with Sign in with Apple</li>
-                        <li>Sync data across your devices</li>
-                    </ul>
-                </li>
-            </ol>
-
-            <h3>Legal Basis (GDPR)</h3>
-            <p>We process your data based on:</p>
-            <ul>
-                <li><strong>Contract performance:</strong> To provide the app services you requested</li>
-                <li><strong>Legitimate interest:</strong> To improve app functionality and fix issues</li>
-                <li><strong>Consent:</strong> For optional features like notifications and social features</li>
-            </ul>
-
-            <h2 id="third-party">Third-Party Services</h2>
-
-            <h3>AniList API</h3>
-            <p><strong>What they provide:</strong> Anime metadata (titles, descriptions, cover images, episode counts)</p>
-            <p><strong>Data shared:</strong> Your anime search queries and IDs of anime you view</p>
-            <p><strong>Their privacy policy:</strong> <a href="https://anilist.co/terms" target="_blank">https://anilist.co/terms</a></p>
-            <p><strong>Note:</strong> We do not create AniList accounts for you or share your watch list with AniList</p>
-
-            <h3>Apple Services</h3>
+        <h3>1. Account Information (Optional)</h3>
+        <div class="highlight-box">
             <p><strong>Sign in with Apple:</strong></p>
             <ul>
-                <li>Provides secure authentication</li>
-                <li>We receive a unique identifier, and optionally your name/email</li>
-                <li>We do not store passwords</li>
+                <li>Apple User ID (encrypted, unique identifier)</li>
+                <li>Email address (if you choose to share it)</li>
+                <li>Name (if you choose to share it)</li>
             </ul>
-            <p>Apple's privacy policy: <a href="https://www.apple.com/legal/privacy/" target="_blank">apple.com/legal/privacy</a></p>
-
-            <h3>Supabase (Database Provider)</h3>
-            <p><strong>What they provide:</strong> Secure cloud database for storing your synced data</p>
+            <p><strong>Guest Accounts:</strong></p>
             <ul>
-                <li>SOC 2 Type II compliant</li>
-                <li>Data encrypted at rest and in transit</li>
-                <li>Row-level security ensures users can only access their own data</li>
+                <li>Only a randomly generated local identifier stored on your device</li>
+                <li>No personal information collected</li>
+                <li>Data never leaves your device</li>
             </ul>
-            <p><strong>Their privacy policy:</strong> <a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a></p>
+        </div>
 
-            <h2 id="security">Data Storage and Security</h2>
+        <h3>2. Watch List Data</h3>
+        <p><strong>What we collect:</strong></p>
+        <ul>
+            <li>Anime titles you add to your watch list</li>
+            <li>Episode progress and completion status</li>
+            <li>Your ratings and notes (if you add them)</li>
+            <li>Timestamps of when you add/update entries</li>
+        </ul>
+        <p><strong>Storage:</strong></p>
+        <ul>
+            <li><strong>Guest accounts:</strong> Stored locally on your device only</li>
+            <li><strong>Signed-in accounts:</strong> Stored locally AND synced to our secure cloud database</li>
+        </ul>
 
-            <h3>Where Your Data Lives</h3>
+        <h3>3. Social Features (Optional)</h3>
+        <p>If you enable social features:</p>
+        <ul>
+            <li>Username you choose</li>
+            <li>Friend code (auto-generated)</li>
+            <li>Friend connections</li>
+            <li>Activity posts (anime completed, level ups)</li>
+            <li>Privacy preferences (who can see your profile/list)</li>
+        </ul>
+
+        <h3>4. Gamification Data</h3>
+        <ul>
+            <li>Your total XP (experience points)</li>
+            <li>Current level and progress</li>
+            <li>Achievement milestones</li>
+        </ul>
+
+        <h3>5. Technical Data</h3>
+        <p>We automatically collect:</p>
+        <ul>
+            <li>Device type and iOS version (for compatibility)</li>
+            <li>App version</li>
+            <li>Crash reports and diagnostic data (anonymized)</li>
+            <li>Image cache storage usage</li>
+        </ul>
+        <p><strong>Purpose:</strong> To fix bugs, improve performance, and ensure compatibility</p>
+
+        <h2 id="info-not-collected">What We Don't Collect</h2>
+        <div class="highlight-box success">
+            <p><strong>We do NOT:</strong></p>
             <ul>
-                <li><strong>Guest accounts:</strong> All data stored locally on your device only</li>
-                <li><strong>Signed-in accounts:</strong> Data stored on your device AND our secure cloud database</li>
+                <li>Track your location</li>
+                <li>Use advertising trackers or third-party analytics</li>
+                <li>Sell your data to anyone</li>
+                <li>Access your photos, contacts, or other apps</li>
+                <li>Share your personal information with third parties for marketing</li>
+                <li>Use cookies for tracking on our website</li>
+                <li>Store passwords (we use Sign in with Apple)</li>
             </ul>
+        </div>
 
-            <h3>Security Measures</h3>
-            <ul>
-                <li>All data encrypted in transit (HTTPS/TLS)</li>
-                <li>Database data encrypted at rest</li>
-                <li>Row-level security (RLS) ensures you can only access your own data</li>
-                <li>Sign in with Apple uses industry-standard security</li>
-                <li>Local device data protected by iOS sandbox security</li>
-                <li>No passwords stored (we use Apple's authentication)</li>
-                <li>Cascading deletes ensure complete data removal</li>
-            </ul>
+        <h2 id="how-we-use">How We Use Your Information</h2>
 
-            <h3>Data Retention</h3>
-            <ul>
-                <li><strong>Active accounts:</strong> Data retained as long as you use the app</li>
-                <li><strong>Deleted accounts:</strong> ALL data deleted immediately from our servers</li>
-                <li><strong>Guest accounts:</strong> Data deleted when you uninstall the app or clear data</li>
-            </ul>
-
-            <h2 id="your-rights">Your Privacy Rights</h2>
-
-            <div class="highlight-box">
-                <p><strong>You have the right to:</strong></p>
+        <h3>Primary Purposes</h3>
+        <ol>
+            <li><strong>Provide Core Functionality</strong>
                 <ul>
-                    <li><strong>Access your data:</strong> View all your watch list data in the app</li>
-                    <li><strong>Export your data:</strong> Use "Export My List" in Settings</li>
-                    <li><strong>Delete your data:</strong> Use "Delete Account" in Settings (removes ALL data from our servers)</li>
-                    <li><strong>Opt-out of sync:</strong> Use a guest account to keep all data local</li>
-                    <li><strong>Change preferences:</strong> Update privacy settings anytime in the app</li>
+                    <li>Store and sync your anime watch list</li>
+                    <li>Track your watching progress</li>
+                    <li>Calculate XP and levels</li>
                 </ul>
-            </div>
+            </li>
+            <li><strong>Enable Social Features</strong>
+                <ul>
+                    <li>Connect with friends</li>
+                    <li>Share activity updates</li>
+                    <li>View friends' watch lists (based on privacy settings)</li>
+                </ul>
+            </li>
+            <li><strong>Improve the App</strong>
+                <ul>
+                    <li>Fix bugs and crashes</li>
+                    <li>Optimize performance</li>
+                    <li>Develop new features</li>
+                </ul>
+            </li>
+            <li><strong>Account Management</strong>
+                <ul>
+                    <li>Authenticate you with Sign in with Apple</li>
+                    <li>Sync data across your devices</li>
+                </ul>
+            </li>
+        </ol>
 
-            <h3>Regional Rights</h3>
-            <p><strong>European Union (GDPR):</strong></p>
+        <h3>Legal Basis (GDPR)</h3>
+        <p>We process your data based on:</p>
+        <ul>
+            <li><strong>Contract performance:</strong> To provide the app services you requested</li>
+            <li><strong>Legitimate interest:</strong> To improve app functionality and fix issues</li>
+            <li><strong>Consent:</strong> For optional features like notifications and social features</li>
+        </ul>
+
+        <h2 id="third-party">Third-Party Services</h2>
+
+        <h3>AniList API</h3>
+        <p><strong>What they provide:</strong> Anime metadata (titles, descriptions, cover images, episode counts)</p>
+        <p><strong>Data shared:</strong> Your anime search queries and IDs of anime you view</p>
+        <p><strong>Their privacy policy:</strong> <a href="https://anilist.co/terms" target="_blank">https://anilist.co/terms</a></p>
+        <p><strong>Note:</strong> We do not create AniList accounts for you or share your watch list with AniList</p>
+
+        <h3>Apple Services</h3>
+        <p><strong>Sign in with Apple:</strong></p>
+        <ul>
+            <li>Provides secure authentication</li>
+            <li>We receive a unique identifier, and optionally your name/email</li>
+            <li>We do not store passwords</li>
+        </ul>
+        <p>Apple's privacy policy: <a href="https://www.apple.com/legal/privacy/" target="_blank">apple.com/legal/privacy</a></p>
+
+        <h3>Supabase (Database Provider)</h3>
+        <p><strong>What they provide:</strong> Secure cloud database for storing your synced data</p>
+        <ul>
+            <li>SOC 2 Type II compliant</li>
+            <li>Data encrypted at rest and in transit</li>
+            <li>Row-level security ensures users can only access their own data</li>
+        </ul>
+        <p><strong>Their privacy policy:</strong> <a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a></p>
+
+        <h2 id="security">Data Storage and Security</h2>
+
+        <h3>Where Your Data Lives</h3>
+        <ul>
+            <li><strong>Guest accounts:</strong> All data stored locally on your device only</li>
+            <li><strong>Signed-in accounts:</strong> Data stored on your device AND our secure cloud database</li>
+        </ul>
+
+        <h3>Security Measures</h3>
+        <ul>
+            <li>All data encrypted in transit (HTTPS/TLS)</li>
+            <li>Database data encrypted at rest</li>
+            <li>Row-level security (RLS) ensures you can only access your own data</li>
+            <li>Sign in with Apple uses industry-standard security</li>
+            <li>Local device data protected by iOS sandbox security</li>
+            <li>No passwords stored (we use Apple's authentication)</li>
+            <li>Cascading deletes ensure complete data removal</li>
+        </ul>
+
+        <h3>Data Retention</h3>
+        <ul>
+            <li><strong>Active accounts:</strong> Data retained as long as you use the app</li>
+            <li><strong>Deleted accounts:</strong> ALL data deleted immediately from our servers</li>
+            <li><strong>Guest accounts:</strong> Data deleted when you uninstall the app or clear data</li>
+        </ul>
+
+        <h2 id="your-rights">Your Privacy Rights</h2>
+
+        <div class="highlight-box">
+            <p><strong>You have the right to:</strong></p>
             <ul>
-                <li>Right to access, rectification, erasure, restriction, portability</li>
-                <li>Right to object and withdraw consent</li>
-                <li>Right to lodge a complaint with supervisory authority</li>
+                <li><strong>Access your data:</strong> View all your watch list data in the app</li>
+                <li><strong>Export your data:</strong> Use "Export My List" in Settings</li>
+                <li><strong>Delete your data:</strong> Use "Delete Account" in Settings (removes ALL data from our servers)</li>
+                <li><strong>Opt-out of sync:</strong> Use a guest account to keep all data local</li>
+                <li><strong>Change preferences:</strong> Update privacy settings anytime in the app</li>
             </ul>
-
-            <p><strong>California (CCPA):</strong></p>
-            <ul>
-                <li>Right to know what personal information we collect</li>
-                <li>Right to delete personal information</li>
-                <li>Right to opt-out of sale (note: we never sell data)</li>
-            </ul>
-
-            <h3>How to Exercise Your Rights</h3>
-            <ol>
-                <li><strong>In-app:</strong> Use Settings > Data Management or Delete Account</li>
-                <li><strong>Email:</strong> Contact us at privacy@watchmori.io</li>
-            </ol>
-            <p>We will respond to requests within 30 days.</p>
-
-            <h2>Children's Privacy</h2>
-            <div class="highlight-box warning">
-                <p>WatchMori is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us immediately.</p>
-                <p><strong>Age rating:</strong> The app is rated for ages 12+ due to anime content.</p>
-            </div>
-
-            <h2>Notifications</h2>
-            <p>We may send you notifications for:</p>
-            <ul>
-                <li>Episode reminders (if you enable them)</li>
-                <li>Level up and achievement alerts</li>
-                <li>Friend requests (if social features enabled)</li>
-            </ul>
-            <p><strong>Control:</strong> You can disable notifications in iOS Settings > WatchMori > Notifications</p>
-
-            <h2>Changes to This Policy</h2>
-            <p>We may update this privacy policy from time to time. We will notify you of material changes by:</p>
-            <ul>
-                <li>Updating the "Last Updated" date</li>
-                <li>Showing an in-app notification</li>
-                <li>Posting on watchmori.io</li>
-            </ul>
-            <p>Your continued use after changes constitutes acceptance.</p>
-
-            <h2>Data Breach Notification</h2>
-            <p>In the unlikely event of a data breach affecting your personal information, we will:</p>
-            <ul>
-                <li>Notify you within 72 hours</li>
-                <li>Report to relevant authorities as required</li>
-                <li>Take steps to mitigate harm</li>
-            </ul>
-
-            <h2>Analytics and Advertising</h2>
-            <div class="highlight-box success">
-                <p><strong>Analytics:</strong> We do not use third-party analytics tools like Google Analytics</p>
-                <p><strong>Advertising:</strong> We do not display ads or use advertising trackers</p>
-                <p><strong>Monetization:</strong> The app may use a premium subscription model in the future</p>
-            </div>
-
-            <h2 id="contact">Contact Us</h2>
-            <div class="contact-box">
-                <h3>Have Questions?</h3>
-                <p>For privacy questions, data requests, or concerns:</p>
-                <p><strong>Email:</strong> <a href="mailto:privacy@watchmori.io">privacy@watchmori.io</a></p>
-                <p><strong>Website:</strong> <a href="https://watchmori.io">watchmori.io</a></p>
-                <p><strong>Response time:</strong> We aim to respond within 48 hours</p>
-            </div>
-
-            <h2>Legal Compliance</h2>
-            <p>This privacy policy complies with:</p>
-            <ul>
-                <li>General Data Protection Regulation (GDPR) - EU</li>
-                <li>California Consumer Privacy Act (CCPA) - USA</li>
-                <li>Apple App Store guidelines</li>
-                <li>iOS privacy requirements</li>
-            </ul>
-
-            <h2>Your Consent</h2>
-            <p>By using WatchMori, you consent to this privacy policy.</p>
-            <ul>
-                <li><strong>For guest accounts:</strong> You consent to local data storage only</li>
-                <li><strong>For signed-in accounts:</strong> You consent to cloud sync and data processing as described</li>
-            </ul>
-            <p>You can withdraw consent at any time by deleting your account or switching to a guest account.</p>
         </div>
 
-        <div class="footer">
-            <p><strong>WatchMori</strong> - Track anime, respect privacy.</p>
-            <p><a href="https://watchmori.io">watchmori.io</a></p>
-            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
-                2026 WatchMori. All rights reserved.
-            </p>
+        <h3>Regional Rights</h3>
+        <p><strong>European Union (GDPR):</strong></p>
+        <ul>
+            <li>Right to access, rectification, erasure, restriction, portability</li>
+            <li>Right to object and withdraw consent</li>
+            <li>Right to lodge a complaint with supervisory authority</li>
+        </ul>
+
+        <p><strong>California (CCPA):</strong></p>
+        <ul>
+            <li>Right to know what personal information we collect</li>
+            <li>Right to delete personal information</li>
+            <li>Right to opt-out of sale (note: we never sell data)</li>
+        </ul>
+
+        <h3>How to Exercise Your Rights</h3>
+        <ol>
+            <li><strong>In-app:</strong> Use Settings > Data Management or Delete Account</li>
+            <li><strong>Email:</strong> Contact us at privacy@watchmori.io</li>
+        </ol>
+        <p>We will respond to requests within 30 days.</p>
+
+        <h2>Children's Privacy</h2>
+        <div class="highlight-box warning">
+            <p>WatchMori is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us immediately.</p>
+            <p><strong>Age rating:</strong> The app is rated for ages 12+ due to anime content.</p>
         </div>
-    </div>
+
+        <h2>Notifications</h2>
+        <p>We may send you notifications for:</p>
+        <ul>
+            <li>Episode reminders (if you enable them)</li>
+            <li>Level up and achievement alerts</li>
+            <li>Friend requests (if social features enabled)</li>
+        </ul>
+        <p><strong>Control:</strong> You can disable notifications in iOS Settings > WatchMori > Notifications</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this privacy policy from time to time. We will notify you of material changes by:</p>
+        <ul>
+            <li>Updating the "Last Updated" date</li>
+            <li>Showing an in-app notification</li>
+            <li>Posting on watchmori.io</li>
+        </ul>
+        <p>Your continued use after changes constitutes acceptance.</p>
+
+        <h2>Data Breach Notification</h2>
+        <p>In the unlikely event of a data breach affecting your personal information, we will:</p>
+        <ul>
+            <li>Notify you within 72 hours</li>
+            <li>Report to relevant authorities as required</li>
+            <li>Take steps to mitigate harm</li>
+        </ul>
+
+        <h2>Analytics and Advertising</h2>
+        <div class="highlight-box success">
+            <p><strong>Analytics:</strong> We do not use third-party analytics tools like Google Analytics</p>
+            <p><strong>Advertising:</strong> We do not display ads or use advertising trackers</p>
+            <p><strong>Monetization:</strong> The app may use a premium subscription model in the future</p>
+        </div>
+
+        <h2 id="contact">Contact Us</h2>
+        <div class="contact-box">
+            <h3>Have Questions?</h3>
+            <p>For privacy questions, data requests, or concerns:</p>
+            <p><strong>Email:</strong> <a href="mailto:privacy@watchmori.io">privacy@watchmori.io</a></p>
+            <p><strong>Website:</strong> <a href="https://watchmori.io">watchmori.io</a></p>
+            <p><strong>Response time:</strong> We aim to respond within 48 hours</p>
+        </div>
+
+        <h2>Legal Compliance</h2>
+        <p>This privacy policy complies with:</p>
+        <ul>
+            <li>General Data Protection Regulation (GDPR) - EU</li>
+            <li>California Consumer Privacy Act (CCPA) - USA</li>
+            <li>Apple App Store guidelines</li>
+            <li>iOS privacy requirements</li>
+        </ul>
+
+        <h2>Your Consent</h2>
+        <p>By using WatchMori, you consent to this privacy policy.</p>
+        <ul>
+            <li><strong>For guest accounts:</strong> You consent to local data storage only</li>
+            <li><strong>For signed-in accounts:</strong> You consent to cloud sync and data processing as described</li>
+        </ul>
+        <p>You can withdraw consent at any time by deleting your account or switching to a guest account.</p>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <p>&copy; 2026 WatchMori &middot; Made by Martyn O'Neill</p>
+            <p><a href="/">watchmori.io</a></p>
+        </div>
+    </footer>
+
 </body>
 </html>
