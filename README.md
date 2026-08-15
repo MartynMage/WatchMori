@@ -13,7 +13,6 @@ screenshots/        App Store screenshots used on the page
 watchmori-icon.png  app icon (also used as the og:image)
 favicon.*, icon-*   favicons and touch icons
 _headers            security and cache headers (Cloudflare)
-CNAME               left over from GitHub Pages, see below
 ```
 
 Both pages are self-contained — the CSS sits in a `<style>` block in each file, and the only external request is the Nunito webfont. They share a palette and a nav, so a change to one usually needs the same change in the other.
@@ -40,7 +39,7 @@ Every branch that isn't `main` gets its own preview URL, which is a good way to 
 
 `_headers` is read by Cloudflare at deploy time. It sets a content security policy that allows only self-hosted files plus the Google Fonts stylesheet and font files — if the page ever needs a script, an embed or an external image, that policy has to be widened or the browser will silently block it.
 
-`CNAME` is a GitHub Pages file and does nothing on Cloudflare. It is still here so GitHub Pages keeps answering during the DNS cutover; delete it once watchmori.io is served by Cloudflare and GitHub Pages is turned off in the repo settings.
+The custom domain is attached to the Pages project in the Cloudflare dashboard rather than to a file in the repo, so there is nothing here to edit if it ever changes.
 
 ## Screenshots
 
